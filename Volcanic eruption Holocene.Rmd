@@ -1,0 +1,744 @@
+---
+title: "Volcanic Eruption during Holocene"
+author: "Irene Viola"
+date: "6/23/2020"
+output: pdf_document
+---
+
+## Abstract
+
+Volcanoes eruptions are a well-known natural phenomenon and a very rare one. That's why predict volcanic eruption is a big issue for geologist and scientist, even data scientist. In this work the volcanic eruption during the Holocene has been analysed and a prediction model has been proposed. The aim is to predict the volcano type based on the last 11700 years of volcanic activity all across the planet. Two different models have been used, knn and random forest, and the results have been compared and the best model has been improved as much as possible. The results are encouraging also if more studies and larger dataset would help to perfect the prediction and the model used.
+
+# 1. Introduction
+
+Volcanoes eruptions are a well-known natural phenomenon that affect the planet since its formation. These eruptive processes can be spectacular, massive and very dangerous, plus them are very rare. The prediction of a volcanic eruption is a very difficult task in science. The aim of this work is to find out a model that can predict volcanic eruption based on volcanoes type and improve the accuracy also if, because of the different variables to consider the rarity or the phenomenon and the large time scale, to reach 0.8-0.9 won’t be possible and credible. To develop the model, Volcanic Eruption during Holocene database model by Smithsonian Institution on keggle.com has been used. 
+
+## 1.2 Holocene Period
+
+Holocene epoch is a geological era, the younger of the Quaternary Period and the latest interval of geologic time (including our time, the present), covering approximately the last 11,700 years of Earth’s history. This period is well known to be the less geological active of the Quaternary period, in fact most of the movement, earthquakes and tectonics stabilized during Pleistocene. During the Holocene the planet is stable and the continents are in the same position as we know them today. The only geological phenomena that keep occurring in this period is volcanism. 
+
+## 1.2 Volcanism
+
+Volcanism is defined as the various processes and phenomena that occurs on Earth’s surface and involve surficial discharge of molten rock, pyroclastic fragments, or hot water and steam, including volcanoes eruptions, geysers, and fumaroles. Volcanisms seems to occur all around the world randomly, instead geologist known that the volcanic activity is associated with several distinct geologic settings. 
+
+## 1.3 Geological settings
+
+Geological setting is a description of geologic characteristics distinctive of a geographic area or phenomena. Regarding volcanisms geological setting is strictly connected to tectonic setting, such as the movement of opening and or colliding of geological plates that cover our planet and that compose the zest of the Earth: the lithosphere. It includes the crust, rigid and solid where we walk on, and the upper mantle, incandescent strata that is directly below the crust and is made of melted rock. Most geological settings are associated with the boundaries of the enormous rigid plates that make up the lithosphere (tectonic setting). The majority of active terrestrial volcanoes and related phenomena occur where two tectonic plates converge and one overrides the other (Subduction process), forcing it down into the mantle to be reabsorbed. Long curved chains of islands known as island arcs form at such subduction zones. 
+A second major site of active volcanism is along the axis of the oceanic ridge system, where the plates move apart on both sides of the ridge and magma wells up from the mantle, creating new ocean floor along the trailing edges of both plates. Virtually all of this volcanic activity occurs underwater. In a few places the oceanic ridges are sufficiently elevated above the deep seafloor that they emerge from the ocean, and subaerial volcanism occurs. Iceland is the best-known example. A relatively small number of volcanoes occur within plates far from their margins because of plate movement over a “hot spot” from which magmas can penetrate to the surface. An even smaller number of volcanoes occur within a particular area of a plate, Rift Valley, due to an opening of the plate and consequent thinning of the plate that permits the magma to reach the surface.
+
+## 1.4 Type of Volcanoes
+
+There are many different type of volcanoes determined by the tectonic setting and magma composition. The most known and common are Stratovolcanoes. These are the classical volcanoes everyone can imagine, with a steep sides and symmetrical cone shape. Usually this type of volcanoes is associated to subduction zones. Then we can find Shield volcanoes that have a less impressive cone due to the low viscosity of the lava coming out, in fact the lava spreads all around covering a large area and forming very gentle slopes. These volcanoes are usually generated within the plate due to the hot spots influence. A very spectacular type of volcano is Fissure Vent. Here magma rises along the opening of two plates (the ridge) and find out its way out along fractures generating fountains of lava called fissure eruption. Usually this eruption can be seen only where the ridge emerges, like in Iceland.  Isolated lava fountains along a fissure produce crater rows of small spatter. Another type of volcano is the spatter cone or cone that is very similar to stratovolcanoes but, since the magma rising contain too much gases, but not enough for an explosive event, it erupts as blobs magma and fall close to the vent forming a steep sided cone. This type of volcano is common in subduction zones and rift valley. When magma is stored in a magma chamber and the gas pressure overcome the equilibrium, the over pressure generates a very large explosive eruption that make all magma sprout out at once. The magma chamber, almost empty, collapses forming a depression or even bowl on the surface. The morphology originated is called Caldera volcano and can happens usually on rift valley and subduction zones. Together with these major classes of volcanoes, there are several intermediate typologies considered in this database. Pyroclastic shield is an uncommon type of shield volcano. Unlike most shield volcanoes, pyroclastic shields are formed mostly of pyroclastic and highly explosive eruptions rather than relatively fluid basaltic lava issuing from vents or fissures on the surface of the volcano. Pyroclastic cones are relatively small, steep (about 30°) volcanic landforms built of loose pyroclastic fragments, most of which are cinder-sized. A volcanic field is an area of the Earth's crust that is prone to localized volcanic activity. They usually contain 10 to 100 volcanoes such as cinder cones and are usually in clusters. Lava flows may also occur. They don’t have to be confused with volcanic complex, or simply “complex”, such as a mixed land form consisting of related volcanic centres and their associated lava flows and pyroclastic rock. They may form due to changes in eruptive habit or in the location of the principal vent area on a particular volcano. lava dome is a circular mound-shaped protrusion resulting from the slow extrusion of viscous lava from a volcano. A maar is a broad, low-relief volcanic crater caused by a phreatomagmatic eruption (an explosion which occurs when groundwater comes into contact with hot lava or magma). A maar characteristically fills with water to form a relatively shallow crater lake which may also be called a maar. Compound Volcano is a volcano with more than one cone. The cone in the Volcano is made up of alternating layers of lava and ashes. Cones are among the simplest volcanic landforms. They are built by ejecta from a volcanic vent, piling up around the vent in the shape of a cone with a central crater. Tuff cone is a small monogenetic volcanic cone produced by phreatic (hydrovolcanic) explosions directly associated with magma migration to the surface. Tuff ring is a related type of small monogenetic volcano that is also produced like tuff cone, but are thinner and circular. Subglacial volcano is a volcanic form produced by subglacial eruptions or eruptions beneath the surface of a glacier or ice sheet which is then melted into a lake by the rising lava. Today they are most common in Iceland and Antarctica. Lava cone is a type of volcano composed primarily of viscous lava flows. The volcanic cone can contain a convex profile due to the flank flows of viscous lava. Explosion crater is a type of crater formed when material is ejected from the surface of the ground by an explosive event at or immediately above or below the surface. Last volcanic morphology type to consider are submarine volcanoes. These are underwater vents or fissures in the Earth's surface from which magma can erupt. Many submarine volcanoes are located near areas of tectonic plate formation, known as mid-ocean ridges. The volcanoes at mid-ocean ridges alone are estimated to account for 75% of the magma output on Earth. Although most submarine volcanoes are located in the depths of seas and oceans, some also exist in shallow water, and these can discharge material into the atmosphere during an eruption. 
+
+## 1.5 Dominant Rock Type
+
+The igneous rocks or magmatic rocks are the rocks that form by volcanism effect. The most abundant igneous rock on Earth is basalt. This is an extrusive (forms when magma comes out and became lava and then solidify) igneous rock formed from the rapid cooling of silica-poor, magnesium-rich and iron-rich lava exposed at or very near to the surface. Rhyolite is again an extrusive igneous rock that, in this case, form from silica rich lava. If it cools down very quickly, the obsidian forms, if it cools down slowly several crystals form inside. Andesite is a medium term between basal and rhyolite, again extrusive igneous rock, formed by cool down of silica, magnesium and iron lava. Dacite, instead is the rock in between rhyolite and andesite, and trachyte is in between andesite and dacite. All the other type considered are peculiar mix in between these.
+
+
+# 2. The Dataset
+
+
+The dataset used in this work is the open Volcanic Eruptions in the Holocene Period in Kaggle.com  (https://www.kaggle.com/smithsonian/volcanic-eruptions) uploaded by the Smithsonian Institution's for his Global Volcanism Program (GVP) and available on my GitHub. This database documents Earth's volcanoes and their eruptive history over the past 10,000 years. The GVP reports on current eruptions from around the world and maintains a database repository on active volcanoes and their eruptions. The GVP is housed in the Department of Mineral Sciences, part of the National Museum of Natural History, on the National Mall in Washington, D.C.
+The database has 1058 registered eruptions in rows and 12 columns with different variables:
+progressive number of each eruption, name of the volcano, country, region, type of volcano, latitude and longitude, altitude, activity, tectonic setting and dominant rock type
+
+```{r download libraries and database, warning=FALSE, include=FALSE}
+if(!require(tidyverse)) install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+if(!require(caret)) install.packages("caret", repos = "http://cran.us.r-project.org")
+if(!require(data.table)) install.packages("data.table", repos = "http://cran.us.r-project.org")
+if(!require(readr)) install.packages("readr", repos= "http://cran.us.r-project.org")
+if(!require(tidyr)) install.packages("tidyr", repos= "http://cran.us.r-project.org")
+if(!require(ggmap)) install.packages("ggmap", repos= "http://cran.us.r-project.org")
+if(!require(dplyr)) install.packages("dplyr", repos= "http://cran.us.r-project.org")
+if(!require(maptools)) install.packages("maptools", repos= "http://cran.us.r-project.org")
+if(!require(plotly)) install.packages("plotly", repos= "http://cran.us.r-project.org")
+if(!require(maps)) install.packages("maps", repos= "http://cran.us.r-project.org")
+if(!require(countrycode)) install.packages("countrycode", repos= "http://cran.us.r-project.org")
+if(!require(ggplot2)) install.packages("ggplot2", repos= "http://cran.us.r-project.org")
+if(!require(recipes)) install.packages("recipes", repos= "http://cran.us.r-project.org")
+if(!require(tidymodels)) install.packages("tidymodels", repos= "http://cran.us.r-project.org")
+if(!require(themis)) install.packages("themis", repos= "http://cran.us.r-project.org")
+if(!require(workflows)) install.packages("workflows", repos= "http://cran.us.r-project.org")
+if(!require(tune)) install.packages("tune", repos= "http://cran.us.r-project.org")
+if(!require(vip)) install.packages("vip", repos= "http://cran.us.r-project.org")
+if(!require(janitor)) install.packages("janitor", repos= "http://cran.us.r-project.org")
+if(!require(ranger)) install.packages("ranger" , repos= "http://cran.us.r-project.org")
+
+##################LOAD DATABASE#############################
+volcanic_eruption <- read_csv("~/Documents/Rscript/Volcanic eruption Holocene/database.csv")
+##############################################################
+#If you don't want to download the .cvs on your computer, here is the keggle link to the database page https://www.kaggle.com/smithsonian/volcanic-eruptions 
+```
+
+The database has been downloaded and uploaded in R.
+
+## 2.1 Libraries Used
+
+The libraries used in this project are:
+  tidyverse
+  
+  caret
+  
+  data.table
+  
+  readr
+  
+  tidyr
+  
+  ggmap
+  
+  dplyr
+  
+  maptools
+  
+  plotly
+  
+  maps
+  
+  countrycode
+  
+  ggplot2
+  
+  recipes
+  
+  tidymodels
+  
+  themis
+  
+  workflows
+  
+  tune
+  
+  vip
+  
+  janitor
+  
+  ranger
+  
+All the libraries are available as automatic installation calls.
+
+# 3. Methods
+
+## 3.1 Data correction and wrangling
+
+First step after downloading the dataset is to inspect the database and check if the data need to be elaborated.
+
+```{r database structure check, echo=TRUE, message=FALSE, warning=FALSE}
+#Database structure
+str(volcanic_eruption)
+#Checking if `Name` is unique 
+unique(volcanic_eruption[duplicated(volcanic_eruption[, "Name"]), "Name"])
+```
+
+First thing to note is that the volcano eruptions considered came from different volcanoes, only nine of them repeat meaning that they gave more than one eruption in 11,700 years. 
+Looking at the Country column, the countries names are not unique, it has been corrected using `countrycode` package and standardize.
+
+```{r country correction, include=FALSE}
+volcanic_eruption[, Country_First = gsub("([[:alnum:]\\s]+)\\s?-.+", "\\1", "Country")]
+#standardize using ISO3C
+volcanic_eruption[, Iso3c = countrycode(Country_First, "country.name", "iso3c")]
+volcanic_eruption[, Country_Name = countrycode(Iso3c, "iso3c", "country.name")]
+```
+
+Before moving on to check uniformity of the different value, it need to be considered if there are NAs.
+
+```{r Check NAs, include=FALSE}
+#Check if there are any NAs in the data set
+is.na(volcanic_eruption)
+#How many NAs are present?
+sum(is.na(volcanic_eruption))
+```
+
+There are 61 NAs. Now, before deciding if ignore or correct them and how, let's check in which variable are present.
+
+```{r where are NAs, include=FALSE}
+#Check where the NAs are
+sum(is.na(volcanic_eruption$Number))
+sum(is.na(volcanic_eruption$Name))
+sum(is.na(volcanic_eruption$Country))
+sum(is.na(volcanic_eruption$Region))
+sum(is.na(volcanic_eruption$Type))
+sum(is.na(volcanic_eruption$`Activity Evidence`))
+sum(is.na(volcanic_eruption$`Last Known Eruption`))
+sum(is.na(volcanic_eruption$Latitude))
+sum(is.na(volcanic_eruption$Longitude))
+sum(is.na(volcanic_eruption$`Elevation (Meters)`))
+sum(is.na(volcanic_eruption$`Dominant Rock Type`))
+sum(is.na(volcanic_eruption$`Tectonic Setting`))
+```
+
+The variables affected by NAs are "Activity Evidence", "Dominant Rock Type" and "Tectonic Setting". Looking at the voices of these variables, is clear that we can't ignore the NAs because, as said in the introduction, these are important variables to detect and identify volcanoes and their eruptions. Because of this we are going to replace NAs with more significant value for each variable.
+
+```{r relace NAs, include=FALSE}
+#Replace NAs in Activity Evidence  with "Evidence Uncertain"
+volcanic_eruption$`Activity Evidence`[is.na(volcanic_eruption$`Activity Evidence`)] <- "Evidence Uncertain"
+
+#Replace NAs in Dominant Rock Type with "No Data"
+volcanic_eruption$`Dominant Rock Type`[is.na(volcanic_eruption$`Dominant Rock Type`)] <- "No Data"
+
+#Replace NAs in Tectonic Setting  with "Unknown"
+volcanic_eruption$`Tectonic Setting`[is.na(volcanic_eruption$`Tectonic Setting`)] <- "Unknown"
+```
+
+Moving on inspecting the variables values another problem is given by the Type of volcanoes. In fact, the different types are not written univocally: the same type of volcano is written with and without s, es and other symbols. This is going to be a problem during the elaboration of data since every difference is considered a different value and in term of volcanoes type it doesn't make sense. 
+
+```{r Type correction, echo=TRUE, message=FALSE, warning=FALSE}
+#the eruption type are written differently
+Type_sum <- volcanic_eruption %>% 
+  select(Country) %>%
+  group_by(volcanic_eruption$Type) %>%
+  summarize(count = n())
+#To have the best and clear correction let's correct each type
+#"manually" to be sure that the names are univocal.
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Caldera(s)", "Caldera", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Complex(es)", "Complex", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Fissure vent(s)", "Fissure vent	", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Fissure vent\t", "Fissure vent	", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Lava cone(s)", "Lava cone", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Lava dome(s)", "Lava dome", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Maar(s)", "Maar", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Pyroclastic cone(s)", "Pyroclastic cone", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Shield", "Pyroclastic shield", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Shield(s)", "Pyroclastic shield", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Stratovolcano?", "Stratovolcano", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Stratovolcano(es)", "Stratovolcano", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Submarine(es)", "Submarine", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Tuff cone(s)", "Tuff cone", Type))
+volcanic_eruption <- volcanic_eruption %>%
+  mutate(Type = ifelse(Type == "Volcanic field(s)", "Volcanic field", Type))
+```
+
+After this correction let's check again how many type of volcanoes were active in the last 11,700 years, during Holocene period.
+
+```{r Type of voclano active in Holocene, message=FALSE, warning=FALSE, include=FALSE}
+#Now that all the same type or eruption have the same name, let's see
+#how many different typer of eruption happened during Holocene
+Type_eruption <- volcanic_eruption %>% 
+  select(Country) %>%
+  group_by(volcanic_eruption$Type) %>%
+  summarize(count = n())
+data.table(Type_eruption) 
+```
+
+Now instead of 33, the types of volcano are 20 (19 identified types plus "Unknown").
+Until now, talking about times and eras it as always been used the geological notation "years". In fact, in geology, time count start from today (year1) and count increase moving to the past until Earth's formation estimated around 4.54 × 10^9 years ± 1%. In the Smithsonian database, another notation is considered for the /Last Known Eruption/. Looking at the column, we can see that the years are expressed in Common Era notation. Common Era (CE) is one of the notation systems for the world's most widely used calendar era. BCE (Before the Common Era or Before the Current Era) is the era before CE and those are equivalent to the Dionysian BC and AD system respectively. Notations refer to the Gregorian calendar (and its predecessor, the Julian calendar). The year-numbering system used by the Gregorian calendar is used throughout the world today, and is an international standard for civil calendars. However, it's definitely not correct when talking in geological time since it refers to human age (just a blink respect to geological ages). Because of this, a correction is needed to convert BCE and CE in “year” notation.
+
+```{r Years correction, echo=TRUE, message=FALSE, warning=FALSE}
+#First let's put NAs instead of "Unknown", this way, in the next step 
+#is possible to convert as.numeric and do calculation to have the 
+#correct notation
+last_eruption <- ifelse(volcanic_eruption$`Last Known Eruption` ==
+            "Unknown", NA , volcanic_eruption$`Last Known Eruption`)
+#Define Years as numeric
+year <- as.numeric(gsub("(^\\d+).+", "\\1", last_eruption))
+#Define the factor of addiction for BCE and CE
+adding_year <- ifelse(grepl("BCE", last_eruption), +2020,0) &
+  ifelse(grepl("CE", last_eruption), -2016,0)
+#Let's perform addition of 2020 to BCEs to have the kY used in
+#geological scale and add 0 to the CEs.
+year_geo <- adding_year + year
+#Let's relace teh column values
+volcanic_eruption$`Last Known Eruption`<-year_geo 
+```
+
+Now all "Last Known Eruption" are in correct geological scale notation.
+
+## 3.2 Data investigation and Visualization
+
+Now that the database is correct, let's use visualization to understand which method is better to use and which variables are more significant.
+Let's start visualize the data about the Holocene eruption, such as the year of the last known eruption of the volcanoes.
+
+```{r frq1, message=FALSE, warning=FALSE, include=FALSE}
+Frq_Activity<-   volcanic_eruption  %>% 
+  select(`Last Known Eruption`, `Activity Evidence`) %>%
+  group_by(`Last Known Eruption`, `Activity Evidence`) %>%
+  summarize(count = n())
+```
+
+```{r plot1, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Activity, aes(x = `Last Known Eruption`, y = count,
+                                   colour = `Activity Evidence` , fill = `Activity Evidence`)) + 
+    geom_bar(stat = "identity") + 
+    theme(axis.text.x = element_text(angle = 90, hjust = 1),legend.text = element_text(size=8)) + 
+    ggtitle("Eruptive activity")
+```
+
+Is possible to see that there is a very intense period of observed eruption in the last 2000 years since it is the period in which man described and documented the phenomena.
+Let's see which Regions and Countries are the more active once.
+
+```{r na to unknown, message=FALSE, warning=FALSE, include=FALSE}
+####Before going on, let's replace NAs in "Last known Eruption" with "unknown" as it was before
+volcanic_eruption$`Last Known Eruption`[is.na(volcanic_eruption$`Last Known Eruption`)] <- "Unknown"
+```
+
+```{r frq2, echo=FALSE, message=FALSE, warning=FALSE}
+Frq_Activity_region <-   volcanic_eruption  %>% 
+  select(Region, `Activity Evidence`) %>%
+  group_by(Region, `Activity Evidence`) %>%
+  summarize(count = n())
+```
+
+```{r plot2, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Activity_region, aes(x = Region , y = count, 
+                                 colour = `Activity Evidence` , fill = `Activity Evidence`)) + 
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1),legend.text = element_text(size=8)) + 
+  ggtitle("Region Activity Frequency")
+```
+
+The most active region is South America with a very high number of eruption dated, observed and credible and low level of Uncertain.
+
+```{r frq3, message=FALSE, warning=FALSE, include=FALSE}
+Frq_Activity_country <- volcanic_eruption  %>% 
+  select(Country, `Activity Evidence`) %>%
+  group_by(Country, `Activity Evidence`) %>%
+  summarize(count = n())
+```
+
+```{r plot3, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Activity_country, aes(x =  Country, y = count, 
+                            colour = `Activity Evidence` , fill = `Activity Evidence`)) + 
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1,size = 5), axis.title.x = element_text(size = 8), axis.text.y = element_text(size = 5), axis.title.y= element_text(size = 8), legend.text = element_text(size=6), legend.title = element_text(size = 8)) + 
+  ggtitle("Activity Evidence Frequency")
+```
+
+Moving to the countries, the most active one is United Stated followed by Russia and Indonesia.
+Now let's consider the type of volcanoes present in the different region.
+
+```{r frq4, echo=FALSE, message=FALSE, warning=FALSE}
+Frq_Type_region <-   volcanic_eruption  %>% 
+  select(Region, Type) %>%
+  group_by(Region, Type) %>%
+  summarize(count = n())
+```
+
+```{r plot4, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Type_region, aes(x = Region , y = count, 
+                                colour = Type , fill = Type)) + 
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.text = element_text(size=8)) + 
+  ggtitle("Regional Volcanoes Type Frequency")
+```
+
+Almost everywhere the stratovolcanoes are the most present, followed by shield (pyroclastic or not). As said in the introduction, often the tectonic setting can give a specific type of volcano. 
+
+```{r frq5, message=FALSE, warning=FALSE, include=FALSE}
+Frq_Type_Tectonic <-   volcanic_eruption  %>% 
+  select(`Tectonic Setting`, Type) %>%
+  group_by(`Tectonic Setting` , Type) %>%
+  summarize(count = n())
+data.table(Frq_Type_Tectonic)
+```
+
+```{r plot5, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Type_Tectonic, aes(x = Type, y = count, 
+                              colour = `Tectonic Setting` , fill = `Tectonic Setting`)) + 
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.text = element_text(size=8)) + 
+  ggtitle("Volcanoes Type in Tectonic Settings")
+```
+
+Stratovolcanoes are the most abundant and are easy to find in subduction thick zones, like where continental crust collide and the thickness of the plaque is >25km. 
+Different rock type differs and in some case characterize volcanoes type, plotting Dominant Rock Type vs Volcano Type is possible to see these differences.
+
+```{r frq6, message=FALSE, warning=FALSE, include=FALSE}
+Frq_Type_Rock <-   volcanic_eruption  %>% 
+  select(`Dominant Rock Type`, Type) %>%
+  group_by(`Dominant Rock Type` , Type) %>%
+  summarize(count = n())
+data.table(Frq_Type_Rock)
+```
+
+```{r plot6, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Type_Rock, aes(x =Type, y = `Dominant Rock Type`, 
+                              colour = `Dominant Rock Type` , fill = `Dominant Rock Type`)) + 
+  geom_point(stat = "identity", show.legend = FALSE) + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.text = element_text(size=8)) + 
+  ggtitle("Volcanoes Rocks vs Type")
+```
+
+Stratovolcanoes are mostly formed by all the different type of rock and this is explainable due the cone strata formation. Instead there are volcanoes type formed mostly by one dominant rock. Crater rows and tuff rings are formed by basalt, cones instead are characterized by andesite.
+Tectonic setting is strictly connected to the activity evidence in fact some tectonic zones are more frequently active than others
+
+```{r frq7, include=FALSE}
+Frq_Tect_activity <-   volcanic_eruption  %>% 
+  select(`Tectonic Setting`, `Activity Evidence`) %>%
+  group_by(`Tectonic Setting` , `Activity Evidence`) %>%
+  summarize(count = n())
+data.table(Frq_Tect_activity)
+```
+
+```{r plot7, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot(Frq_Tect_activity, aes(x =`Tectonic Setting`, y = count, 
+                          colour = `Activity Evidence` , fill = `Activity Evidence`)) + 
+  geom_bar(stat = "identity") + 
+  theme(axis.text.x = element_text(angle = 90, hjust = 1), legend.text = element_text(size=8)) + 
+  ggtitle("Tectonic settings activity")
+```
+
+Here is possible to see that teh tectonic setting Subduction Zone/Continental Crust (<25km) is the most active tectonic setting.
+Using latitude and longitude data is possible to see the distribution world-wide of the different volcanoes according to tectonic setting and according to activity evidence.
+
+```{r plot8, echo=FALSE, message=FALSE, warning=FALSE}
+world <- map_data("world")
+ggplot() + geom_polygon(data = world, aes(x =  long, y = lat, group = group))+  
+  geom_point(data = volcanic_eruption, aes(x = Longitude, y = Latitude, colour = `Tectonic Setting` , 
+                                 alpha = 0.3 )) +
+  stat_density2d(show.legend = FALSE) + xlab("Longitude") +ylab("Latitude") +
+  theme(legend.text = element_text(size=6))+
+  coord_quickmap()
+```
+
+```{r plo9, echo=FALSE, message=FALSE, warning=FALSE}
+world <- map_data("world")
+ggplot() + geom_polygon(data = world, aes(x =  long, y = lat, group = group))+  
+  geom_point(data = volcanic_eruption, aes(x = Longitude, y = Latitude, colour = `Activity Evidence`, 
+                                           alpha = 0.3 )) +
+  stat_density2d(show.legend = FALSE) + xlab("Longitude") +ylab("Latitude") +
+  coord_quickmap()
+```
+
+Comparing the two plots we can identify the areas where the presence and the activity of volcanoes is higher, the subduction zones.
+
+## 3.4 Building the model
+
+Until now all the values and parameters have been considered, but looking at the database some variables have a lot of voices that can be group together on prediction and model purpose.
+In "volcano type", there are 20 different voices, some of them with a very low number of eruption.
+
+```{r volcanoes, message=FALSE, warning=FALSE, include=FALSE}
+volcanic_eruption %>% count(Type, sort = TRUE)
+```
+
+So let's create a new database where we consider the four most abundant type of volcanoes and let's group the remaining as "Other". In this database are added all the variables to use as predictor of the volcanic activity related to each type of volcanoes.
+
+```{r database correction1, message=FALSE, warning=FALSE, include=FALSE}
+volcanoes_work <-
+  volcanic_eruption %>% 
+  transmute(
+    volcano_type = 
+      case_when(
+        str_detect(Type, "Stratovolcano") ~ "Stratovolcano",
+        str_detect(Type, "Pyroclastic shield")        ~ "Pyroclastic shield",
+        str_detect(Type, "Submarine")        ~ "Submarine",
+        str_detect(Type, "Pyroclastic cone")        ~ "Pyroclastic cone",
+        TRUE                                              ~ "Other"
+      ) ,
+    Number,
+    Latitude,
+    Longitude,
+    `Elevation (Meters)`,
+    `Last Known Eruption`,
+    `Tectonic Setting` ,
+    `Dominant Rock Type`
+  ) %>% 
+  mutate_if(is.character, factor)
+```
+
+Instead of the names of the volcanoes, the ID number has been considered, together with latitude and longitude for geographical positioning. To identify the volcanoes type (grouped) have been taken into account also the last known eruption, the elevation, the tectonic setting and the dominant rock type as predictors. Looking at /tectonic setting/, we can group it in four categories: subduction zone, rift zone and intraplate plus the Unknown group for unknown data.
+
+```{r group tectonic setting, message=FALSE, warning=FALSE, include=FALSE}
+volcanoes_work %>% 
+  count(`Tectonic Setting`, sort = TRUE)
+#Group the Thectonic setting based tectonic type
+volcanoes_work3 <-
+  volcanoes_work %>% 
+  transmute(
+    volcano_type,
+    Number,
+    Latitude,
+    Longitude,
+    `Elevation (Meters)`,
+    `Last Known Eruption`,
+    `Tectonic` = 
+      case_when(
+        `Tectonic Setting` == "Subduction Zone / Continental Crust (>25 km)" ~ "Subduction Zone",
+        `Tectonic Setting` == "Intraplate / Continental Crust (>25 km)" ~ "Intraplate",
+        `Tectonic Setting` == "Subduction Zone / Oceanic Crust (< 15 km)" ~ "Subduction Zone",
+        `Tectonic Setting` == "Rift Zone / Continental Crust (>25 km)" ~ "Rift Zone",
+        `Tectonic Setting` == "Rift Zone / Oceanic Crust (< 15 km)" ~ "Rift Zone",
+        `Tectonic Setting` == "Subduction Zone / Intermediate Crust (15-25 km)" ~ "Subduction Zone",
+        `Tectonic Setting` == "Rift Zone / Intermediate Crust (15-25 km)" ~ "Rift Zone",
+        `Tectonic Setting` == "Intraplate / Oceanic Crust (< 15 km)" ~ "Intraplate",
+        `Tectonic Setting` == "Intraplate / Intermediate Crust (15-25 km)" ~ "Intraplate",
+        `Tectonic Setting` == "Subduction Zone / Crust Thickness Unknown" ~ "Subduction Zone",
+        TRUE                                              ~ "Unknown"
+      )  ,
+    `Dominant Rock Type`
+  ) %>% 
+  mutate_if(is.character, factor)
+```
+
+Last grouping to be considered is the dominant rock type grouping. In this case we group rocks based on the most abundant rock type in volcanology and simplify the classes.
+
+```{r dominant rock type, message=FALSE, warning=FALSE, include=FALSE}
+#Group dominant rock type
+volcanoes_work4 <-
+  volcanoes_work3 %>% 
+  transmute(
+    volcano_type,
+    Number,
+    Latitude,
+    Longitude, 
+    `Elevation (Meters)`,
+    `Last Known Eruption`,
+    `Tectonic`,
+    Rock_Type= 
+      case_when(
+        `Dominant Rock Type` == "Andesite / Basaltic Andesite" ~ "Andesite",
+        `Dominant Rock Type` == "Basalt / Picro-Basalt" ~ "Basalt",        
+        `Dominant Rock Type` == "Dacite" ~ "Dacite",  
+        `Dominant Rock Type` == "Trachybasalt / Tephrite Basanite" ~ "Trachybasalt",  
+        `Dominant Rock Type` == "Rhyolite" ~ "Rhyolite",  
+        `Dominant Rock Type` == "Trachyte / Trachydacite " ~ "Trachyte",  
+        `Dominant Rock Type` == "Trachyandesite / Basaltic Trachyandesite" ~ "Trachyandesite",  
+        TRUE                                              ~ "No Data"
+      )  ,
+  ) %>% 
+  mutate_if(is.character, factor)
+```
+
+Now that the new database to work with has been created, some small adjustments need to be done, like take out spaces in the column names to make it easier for the algorithms to use them, because spaces can give problems.
+
+```{r correct names, message=FALSE, warning=FALSE, include=FALSE}
+#Change name for the column "Elevation (meter)" to Elevation and "Last Known Eruprion" in Last_eruption
+names(volcanoes_work4)[names(volcanoes_work4) == "Elevation (Meters)"] <- "Elevation"
+names(volcanoes_work4)[names(volcanoes_work4) == "Last Known Eruption"] <- "Last_eruption"
+```
+
+Now the last process to do is to create a partition of the database in training set and test set (90%-10%).
+
+```{r partitioning, echo=TRUE, message=FALSE, warning=FALSE}
+index <- createDataPartition(volcanoes_work4$volcano_type, p = 0.9, list = FALSE)
+volcano_work_training <- volcanoes_work4[index,]
+volcano_work_testing  <- volcanoes_work4[-index,]
+```
+
+## 3.5 Run the model
+
+
+First algorithm considered is the K- nearest neighbors or Knn since it is easier to use in multiple dimensions. Knn is a method used for classification and regression that permit the pattern-recognition.
+
+```{r Knn method, echo=TRUE, message=FALSE, warning=FALSE}
+#First Method: Knn method
+fit <- train(volcano_type ~ ., method = "knn",
+             tuneGrid = data.frame(k = seq(1, 15, 2)), data = volcano_work_training)
+fit
+```
+
+The accuracy of the model is near 0.6.
+Because of the large number of predictors and the large number of parameter that are going to define the probability and the prediction, random Forests is the best algorithm to use in this classification prediction.
+
+```{r random forest, echo=TRUE, message=FALSE, warning=FALSE}
+#Second Method: Random Forest
+rf_fit <- train(as.factor(volcano_type)~ .,
+                data = volcano_work_training, 
+                method = "ranger")
+rf_fit
+#PRediction for voclavoes eruption with random forest
+volcanoes_rf_pred <- predict(rf_fit, volcano_work_testing)
+```
+
+The accuracy improved in the model and give a prediction overall accuracy of 0.69. However, looking at the accuracy of each class, sensitivity and specificity is possible to see that also if random forest is a very good model to predict volcanoes type, it seems too perfect and need more correction in the database to perfection it.
+To check if the impression had about the model is correct, let's check centre and scale, perform Principal Component Analysis and identify and remove variables with near zero variance.
+
+```{r pca_nzv, echo=TRUE, message=FALSE, warning=FALSE}
+volcano_nzv_pca <- preProcess(select(volcanoes_work4, - volcano_type), 
+                              method = c("center", "scale", "nzv", "pca"))
+#The result tells that some components have been ignored. 
+volcano_nzv_pca
+# identify which variables were ignored, centered, scaled, etc
+volcano_nzv_pca$method
+```
+
+Some components have been ignored: "Last_eruption", "Tectonic" and "Rock_Type". These are important predictors in the analysis and is mandatory to understand why have been ignored.
+
+```{r check classes, eval=FALSE, message=FALSE, warning=FALSE, include=FALSE}
+class(volcanoes_work4$Tectonic)
+class(volcanoes_work4$Rock_Type)
+class(volcanoes_work4$Last_eruption)
+```
+
+These three variables are factor. To be considered in the analysis is needed to convert them as number. Since the conversion need to be accurate in its significance, dummies has been used.
+
+```{r step_dummies correction, echo=TRUE, message=FALSE, warning=FALSE}
+volcano_recipe <- recipe(volcano_type ~ ., data = volcanoes_work4)
+volcano_dummies<- volcano_recipe %>% step_dummy(Tectonic, Rock_Type,
+                                    Last_eruption, one_hot = TRUE,) 
+volcano_dummies <-prep(volcano_dummies, training= volcanoes_work4)
+volcano_work_d<- bake(volcano_dummies, new_data = volcanoes_work4) 
+```
+
+```{r reunite, message=FALSE, warning=FALSE, include=FALSE}
+#reunite classification in a new dataset, grep names.
+unique(volcanoes_work4$Tectonic,volcanoes_work4$Rock_Type, volcanoes_work4$Last_eruption)
+grep("^Tectonics","^Rock_Type","^Last_eruption", names(volcanoes_work4), value = TRUE)
+#the dataset is ready
+```
+
+Now the new dataset is correct and is possible to run again the model after the database has been partitioned again in test and training dataset.
+
+```{r partitioning2, echo=TRUE, message=FALSE, warning=FALSE}
+set.seed(1) 
+test_index <- createDataPartition(volcano_work_d$volcano_type, p = 0.9, list = FALSE)
+volcano_d_training <- volcano_work_d[test_index,]
+volcano_d_testing  <- volcano_work_d[-test_index,]
+
+```
+
+Here Resampling method using traincontrol to control of printing and resampling for train has been used.
+
+```{r resamplig, echo=TRUE, message=FALSE, warning=FALSE}
+fit_control <- trainControl(
+  method = "oob", #oob beacuse we 'll use random forest
+  number = 10)
+```
+
+Now that the train control has been defined let's run again the random forest and redo the prediction for this model.
+
+```{r random forest2, echo=TRUE, message=FALSE, warning=FALSE}
+set.seed(1)
+volcano_rf_fit <- train(as.factor(volcano_type) ~ ., 
+                        data = volcano_d_training, 
+                        method = "ranger",
+                        trControl = fit_control)
+volcano_rf_fit
+#Re-predict outcome on a test set
+volcanoes_rf_pred2 <- predict(volcano_rf_fit, volcano_d_testing)
+```
+
+With the step dummies correction accuracy improved.
+A last attempt that has been done is to perform another random forest in a different way using as set_mode (Classification) and a workflow.
+
+```{r echo=TRUE, message=FALSE, warning=FALSE}
+volcano_rf_fit2 <-
+  rand_forest(trees = 1000) %>% 
+  set_mode("classification") %>% 
+  set_engine("ranger")
+volcano_rf_fit2
+#Since "classification" as been used as Mode in RF, a workflow is
+#needed to keep this working
+#First do a new recipe
+volcano_recipe2 <- recipe(volcano_type ~ ., data = volcano_work_d)
+#this time use the workflow function to constrain recipe and model
+volcano_wf <-
+  workflow() %>% 
+  add_recipe(volcano_recipe2) %>% 
+  add_model(volcano_rf_fit2)
+#Bootstrap will define the resamples in the analysis
+volcano_boot <- 
+  volcano_work_d %>% 
+  bootstraps()
+#fit resample will run the method using the workflow defined and
+#resaple using boothstrap instead of test and straining
+volcano_res <-
+  fit_resamples(
+    volcano_wf,
+    resamples = volcano_boot,
+    control = control_resamples(save_pred = TRUE))
+```
+
+
+# 4. Results
+
+
+In the table has been reported the results of the methods used and their prediction.
+
+| Models                                      |accuracy |
+|---------------------------------------------|---------|
+| Knn                                         | 0.58    |
+| first random forest                         | 0.65    |
+| Second random forest (dummies correction)   | 0.67    |
+| Third random forest (dummies+workflow)      | 0.63    |
+|---------------------------------------------|         |
+| Predictions                                 |         |
+|---------------------------------------------|         |
+| First random forest prediction              | 0.69    |
+| Second random forest prediction             | 0.70    |
+
+In general, is possible to see an improvement in accuracy in the models and in models prediction, excluded the last one. 
+Looking at the confusion matrices of the random forest models is possible to see that both are correct for the gini effect, the K is very similar: first model k=0.45, second model k=0.48. 
+Looking at the confusion matrices of the predictions, an increase in overall accuracy reflects an adjustment in the single class ones.
+
+```{r cm random forest1, echo=TRUE, message=FALSE, warning=FALSE}
+confusionMatrix(volcanoes_rf_pred, as.factor(volcano_work_testing$volcano_type))
+```
+
+In the first model confusion matrix is possible to see that the statistics by class are strange in some volcano type. Beside the balanced accuracy that is very high in submarine class (near 1), also sensitivity and specificity are near 1. The opposite trend is visible in Pyroclastic cone class, here balanced accuracy is the lowest in between the classes together with sensitivity and specificity is very high. All the other classes are in between. These results can make sense in class term since the pyroclastic cone class is the less abundant but submarine is not the most abundant. Since results are "too perfect" to be volcanic eruption predictions, the correction is needed.
+
+```{r cm random forest2, echo=TRUE, message=FALSE, warning=FALSE}
+confusionMatrix(volcanoes_rf_pred2,as.factor(volcano_d_testing$volcano_type))
+```
+
+The second confusion matrix for the second prediction, have higher overall accuracy. Looking at the single class statistics, is possible to see that the higher accuracy is given by Submarine volcanoes again, also if it is lower than before, is near 1 again with a very high but more reasonable sensitivity and specificity. It makes sense that these value are very high since the submarine class cover up all the volcanoes eruption below sea-level independently to the type of volcano erupting. Pyroclastic cones are less abundant than the other classes and are difficult to predict since they are a peculiar type of cones so it makes sense that the sensitivity is 0 and the specificity is high, giving also a balanced accuracy of 0.50. Also Pyroclastic Shields are a peculiar type of shield volcanoes, but they are more abundant on the planet so the balanced accuracy near 0.7 together with the sensitivity and specificity make sense. Stratovolcanoes class represent the more abundant volcano type of the planet and most recognizable one, in fact the sensitivity is even higher that the submarine ones and the specificity is lower. The balanced accuracy for this class is very good. Last one to consider is the "other" class that include all the volcanoes remaining, it is not surprising, since it covers less abundant and more differenced typology that its statistics are these. 
+However, the general increase in overall accuracy and decrease in single class statistics make the second random forest model the best one in predicting volcanoes eruption. 
+```{r RF_workflow, echo=TRUE, warning=FALSE}
+#Here the new results
+volcano_res %>% 
+  collect_metrics()
+```
+Last results to discuss is the random forest model with classification output and the use of the workflow. The accuracy is lower than the other classes, however it is reasonable, over 0.6. It must be considered that the roc_auc is over 0.8 and the standard errors are quite low both for accuracy and roc_auc. In data science usually we consider the best model the one with higher accuracy in general, however in geology, the 0.6 is a very good prediction and seems very reasonable. Using this last random forest algorithm, is possible to construct a prediction and plot it in map to make it easyes to understand it.
+```{r predict workflor rf, echo=TRUE, message=FALSE, warning=FALSE}
+volcano_pred <- 
+  volcano_res %>% 
+  collect_predictions() %>% 
+  mutate(correct = volcano_type == .pred_class) %>% 
+  left_join(
+    volcano_work_d %>% 
+      mutate(.row = row_number())
+  )
+```
+
+```{r plot10, echo=FALSE, message=FALSE, warning=FALSE}
+ggplot() +
+  geom_map( data = world,  map = world, aes( long, lat,
+      map_id = region ),
+    colour = "white",
+    fill = "gray50",
+    alpha = 0.2 ) +
+  stat_summary_hex(
+    data = volcano_pred,
+    aes(Longitude, Latitude, z = as.integer(correct)),
+    fun = "mean",
+    alpha = 0.7,
+    bins = 70 ) +
+  scale_fill_gradient(
+    high = "green",
+    low = "red",
+    labels = scales::percent) +
+  labs(
+    title = "Distribution of Volcanoes and their Prediction Accuracy",
+    fill = "Percent classified \ncorrectly")
+```
+
+
+# 5. Conclusions
+
+
+The best model to predict volcanoes eruption is the random forest, since all the prediction proposed is based on classification, in particular the one corrected using dummies. In this way all the predictors had been considered and used to compute the models. A larger database and a stronger computer are needed to improve the model, since the model has been based only on 1058 observation that in data science are very few and the laptop used took 20-30 minutes to elaborate the script.
+The real big limitation of this kind of data is the limitation. This limitation is given by the phenomenon itself: volcanic eruptions are rare, geologically speaking, and cover a very large range of typology that cross from the geysers to Etna spectacular eruptions. Just think that the eruptions observed actually during Holocene are few and cover only the last 2000 year roughly. These events are also difficult to observe and date, for instance submarine events and Early Holocene events. 
+
+
+### References
+
+-Understanding Earth, by John Grotzinger and Tom Jordan (2010).
+
+-Volcanoes, by Peter Francis (2003).
+
+-Scienze della terra. Vol. 1: Elementi di geologia generale, by Pompeo L. Casati, (2012).
+
+-Introduction to Data Science, Rafael A. Irizarry.
